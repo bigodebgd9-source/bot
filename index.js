@@ -1,7 +1,7 @@
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
-  console.log(`Logado como ${client.user.tag}`);
+  console.log(Logado como ${client.user.tag});
 });
 
 client.on('interactionCreate', async interaction => {
@@ -19,13 +19,13 @@ client.on('interactionCreate', async interaction => {
     }
     channelData.queue.push(userId);
     saveData(data);
-    await interaction.reply({ content: `Você entrou na fila. Posição: ${channelData.queue.length}`, ephemeral: true });
+    await interaction.reply({ content: Você entrou na fila. Posição: ${channelData.queue.length}, ephemeral: true });
 
     if (channelData.queue.length >= channelData.size) {
       const players = channelData.queue.splice(0, channelData.size);
       saveData(data);
-      const mentions = players.map(id => `<@${id}>`).join(', ');
-      await interaction.followUp({ content: `Partida formada: ${mentions}` });
+      const mentions = players.map(id => <@${id}>).join(', ');
+      await interaction.followUp({ content: Partida formada: ${mentions} });
     }
 
   } else if (interaction.commandName === 'leave') {
@@ -44,8 +44,8 @@ client.on('interactionCreate', async interaction => {
       await interaction.reply({ content: 'Fila vazia.' });
       return;
     }
-    const lines = channelData.queue.map((id, i) => `${i + 1}. <@${id}>`);
-    await interaction.reply({ content: `Fila atual (tamanho para partida: ${channelData.size}):\n${lines.join('\n')}` });
+    const lines = channelData.queue.map((id, i) => ${i + 1}. <@${id}>);
+    await interaction.reply({ content: Fila atual (tamanho para partida: ${channelData.size}):\n${lines.join('\n')} });
 
   } else if (interaction.commandName === 'setsize') {
     const newSize = interaction.options.getInteger('size');
@@ -55,15 +55,15 @@ client.on('interactionCreate', async interaction => {
     }
     channelData.size = newSize;
     saveData(data);
-    await interaction.reply({ content: `Tamanho da partida definido para ${newSize}.`, ephemeral: true });
+    await interaction.reply({ content: Tamanho da partida definido para ${newSize}., ephemeral: true });
 
     while (channelData.queue.length >= channelData.size) {
       const players = channelData.queue.splice(0, channelData.size);
       saveData(data);
-      const mentions = players.map(id => `<@${id}>`).join(', ');
-      await interaction.followUp({ content: `Partida formada: ${mentions}` });
+      const mentions = players.map(id => <@${id}>).join(', ');
+      await interaction.followUp({ content: Partida formada: ${mentions} });
     }
   }
 });
 
-client.login(MTQzMzkyMDQ4MzU2NDMyMjg0Ng.GjLfVG.-Ks3QffcsBkK3TJcZjtPahCGH7oIDSCFSYfsOA);
+client.login(TOKEN);
